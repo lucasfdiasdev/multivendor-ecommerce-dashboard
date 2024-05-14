@@ -1,17 +1,51 @@
-import axios from "axios";
 import { create } from "zustand";
+import toast from "react-hot-toast";
+import axios, { AxiosError } from "axios";
+
 import { endpoints } from "@/utils/endpoints";
 
-export const useAdminStore = create((set) => ({
-  admin_login: async (info: { email: string; password: string }) => {
-    console.log(info);
+interface IAdminStore {
+  admin_login: (info: { email: string; password: string }) => Promise<void>;
+}
+
+export const useAdminStore = create<IAdminStore>((set) => ({
+  admin_login: async (info) => {
+    // console.log(info);
     try {
       const { data } = await axios.post(endpoints.admin_login, info, {
         withCredentials: true,
       });
-      console.log(data);
+      // console.log(data);
+
+      set(data);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<any>;
+
+        if (axiosError.response?.status === 404) {
+          console.error(
+            "Erro 404 - Não autorizado:",
+            axiosError.response.data.message
+          );
+          toast.error(axiosError.response.data.message);
+        }
+      }
     }
+  },
+}));
+
+interface IAdminSession {
+  get_session: (session: {
+    userId?: string;
+    name?: string;
+    imageUrl?: string;
+    role?: string;
+  }) => Promise<void>;
+}
+
+export const useAdminSession = create<IAdminSession>((set) => ({
+  get_session: async (session) => {
+    try {
+    } catch (error) {}
   },
 }));
