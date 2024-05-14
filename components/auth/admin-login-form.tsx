@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useAdminStore } from "@/store";
@@ -20,7 +21,9 @@ import { Input } from "@/components/global/input";
 import { Button } from "@/components/global/button";
 
 const AdminLoginForm = () => {
+  const router = useRouter();
   const admin_login = useAdminStore((state: any) => state.admin_login);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const formLogin = useForm<z.infer<typeof loginSchema>>({
@@ -34,12 +37,17 @@ const AdminLoginForm = () => {
   const onSubmitAdminLogin: SubmitHandler<z.infer<typeof loginSchema>> = async (
     data
   ) => {
-    console.log(data);
     setIsLoading(true);
 
     try {
       admin_login(data);
-    } catch (error) {}
+
+      router.push("/dashboard");
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
