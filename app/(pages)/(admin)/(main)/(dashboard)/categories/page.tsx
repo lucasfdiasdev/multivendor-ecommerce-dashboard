@@ -1,18 +1,12 @@
 "use client";
 
-import * as z from "zod";
 import Image from "next/image";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi";
 
-import { categorySchema } from "@/utils/schema";
-
 import { Input } from "@/components/global/input";
-import { Form, FormControl } from "@/components/global/forms";
 import CategoryForm from "@/components/forms/category-form";
 
 const CategoriesPage = () => {
