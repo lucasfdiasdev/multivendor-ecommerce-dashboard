@@ -3,10 +3,10 @@
 import * as z from "zod";
 import Link from "next/link";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { registerSchema } from "@/utils/schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   Form,
@@ -18,7 +18,7 @@ import {
 } from "@/components/global/forms";
 import { Input } from "@/components/global/input";
 import { Button } from "@/components/global/button";
-import SocialAuthForm from "@/components/auth/social-auth-form";
+import SocialAuthForm from "@/components/forms/social-auth-form";
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);

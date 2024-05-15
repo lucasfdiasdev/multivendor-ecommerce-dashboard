@@ -1,6 +1,6 @@
-import React from "react";
-import { Button } from "../global/button";
 import { FcGoogle } from "react-icons/fc";
+
+import { Button } from "@/components/global/button";
 
 const SocialAuthForm = () => {
   return (
