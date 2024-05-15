@@ -41,11 +41,13 @@ const routes: IRoute[] = [
     label: "Ordens",
     icon: FaClipboardList,
     href: "/orders",
+    role: "ADMIN",
   },
   {
     label: "Categoria",
     icon: MdDashboard,
-    href: "/categoria",
+    href: "/categories",
+    role: "ADMIN",
   },
   {
     label: "Vendedores",

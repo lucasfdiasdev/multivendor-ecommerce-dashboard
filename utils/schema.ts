@@ -32,3 +32,11 @@ export const registerSchema = z.object({
         "Sua senha deve ter 8 caracteres, 1 letra maiúscula, 1 letra minúscula e 1 caractere especial",
     }),
 });
+
+export const categorySchema = z.object({
+  categoryName: z
+    .string({ message: "Nome obrigatório." })
+    .min(3, { message: "Nome deve conter 3 no mínimo caracteres." })
+    .regex(/^[a-zA-Z\s]+$/),
+  categoryImage: z.string(),
+});
