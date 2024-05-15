@@ -6,11 +6,12 @@ import { useState } from "react";
 import { BsArrowBarDown } from "react-icons/bs";
 
 import { Input } from "@/components/global/input";
+import Pagination from "@/components/global/pagination";
 
 const OrdersPage = () => {
   const [show, setShow] = useState(false);
   const [parPage, setParPage] = useState(5);
-  const [currentpage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -85,6 +86,15 @@ const OrdersPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-end mt-4 bottom-4 right-4">
+          <Pagination
+            pageNumber={currentPage}
+            setPageNumber={setCurrentPage}
+            totalItem={50}
+            parPage={parPage}
+            showItem={3}
+          />
         </div>
       </div>
     </main>
