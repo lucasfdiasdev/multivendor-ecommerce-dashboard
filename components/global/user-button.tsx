@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,18 +10,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/global/dropdown-menu";
+import Avatar from "@/components/global/avatar";
 
 const UserButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Image
-          width={40}
-          height={40}
-          src={""}
-          alt="Avatar image"
-          className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border cursor-pointer"
-        />
+        <Avatar src={""} alt="avatar user" width={40} height={40} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56">

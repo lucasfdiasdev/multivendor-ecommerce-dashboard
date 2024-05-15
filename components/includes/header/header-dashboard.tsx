@@ -6,7 +6,7 @@ import MobileSidebar from "@/components/includes/sidebar/mobile-sidebar";
 
 const HeaderDashboard = () => {
   return (
-    <header className="flex items-center gap-4 p-4">
+    <header className="flex items-center gap-4 px-4 md:px-8 py-4">
       <MobileSidebar />
       <div className="w-full gap-4 flex items-center md:justify-between">
         <Input placeholder="Buscar..." className="w-full md:max-w-fit" />
