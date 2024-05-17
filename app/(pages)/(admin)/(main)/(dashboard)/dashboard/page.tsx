@@ -1,14 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import Chart from "react-apexcharts";
+
 import { MdAttachMoney } from "react-icons/md";
 import { FaClipboardList, FaCubes, FaUsers } from "react-icons/fa";
 
-import Chart from "react-apexcharts";
 import Card from "@/components/global/card";
-import CardContentSales from "@/components/dashboard/card-content-sales";
-import Link from "next/link";
-import Image from "next/image";
 import Avatar from "@/components/global/avatar";
+import CardContentSales from "@/components/dashboard/card-content-sales";
 
 const DashboardAdminPage = () => {
   const bodyContentSales = <CardContentSales change={20.9} amount={8930.63} />;
