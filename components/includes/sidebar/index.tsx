@@ -53,26 +53,31 @@ const routes: IRoute[] = [
     label: "Vendedores",
     icon: FaUsers,
     href: "/sellers",
+    role: "ADMIN",
   },
   {
     label: "Pagamentos Recebidos",
     icon: MdAttachMoney,
     href: "/payments-request",
+    role: "ADMIN",
   },
   {
     label: "Vendedores Inativos",
     icon: FaUsersSlash,
     href: "/inactive-sellers",
+    role: "ADMIN",
   },
   {
     label: "Solicitação de Vendedores",
     icon: FaUserClock,
-    href: "/categoria",
+    href: "/request-sellers",
+    role: "ADMIN",
   },
   {
-    label: "Chat Seller",
+    label: "Chat Vendedores",
     icon: BsChatRightDots,
-    href: "/categoria",
+    href: "/chat-sellers",
+    role: "ADMIN",
   },
 ];
 
