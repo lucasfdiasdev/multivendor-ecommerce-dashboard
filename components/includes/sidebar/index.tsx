@@ -64,19 +64,19 @@ const routes: IRoute[] = [
   {
     label: "Vendedores Inativos",
     icon: FaUsersSlash,
-    href: "/inactive-sellers",
+    href: "/sellers-inactive",
     role: "ADMIN",
   },
   {
     label: "Solicitação de Vendedores",
     icon: FaUserClock,
-    href: "/request-sellers",
+    href: "/sellers-request",
     role: "ADMIN",
   },
   {
     label: "Chat Vendedores",
     icon: BsChatRightDots,
-    href: "/chat-sellers",
+    href: "/sellers-chat",
     role: "ADMIN",
   },
 ];
