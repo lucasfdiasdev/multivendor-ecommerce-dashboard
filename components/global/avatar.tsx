@@ -17,7 +17,7 @@ const Avatar: React.FC<IAvatar> = ({ src, alt, className, width, height }) => {
       src={src}
       alt={alt}
       className={clsx(
-        "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border cursor-pointer",
+        "relative flex shrink-0 overflow-hidden rounded-full border cursor-pointer object-cover object-center",
         className
       )}
     />
