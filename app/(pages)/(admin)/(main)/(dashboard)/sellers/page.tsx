@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
-import { CiEdit } from "react-icons/ci";
+import { BsEye } from "react-icons/bs";
 
 import { Input } from "@/components/global/input";
 import Pagination from "@/components/global/pagination";
@@ -110,9 +111,9 @@ const SellersAdminPage = () => {
                     scope="col"
                     className="py-3 px-4 font-medium whitespace-nowrap"
                   >
-                    <div className="flex gap-4">
-                      <CiEdit size={24} className="cursor-pointer" />
-                    </div>
+                    <Link href={`/sellers/${seller.id}`}>
+                      <BsEye size={20} className="cursor-pointer" />
+                    </Link>
                   </td>
                 </tr>
               ))}
