@@ -14,18 +14,28 @@ const AllProductsSellerAdmin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
-  const categories = [
+  const products = [
     {
       id: 1,
-      name: "Camisas",
+      name: "Camisa Cinza",
       imageUrl:
         "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      category: "Jaquetas",
+      brand: "M",
+      price: "R$ 100,00",
+      discount: "10%",
+      stock: 10,
     },
     {
       id: 2,
-      name: "Jaquetas",
+      name: "Jaqueta Purple",
       imageUrl:
         "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      category: "Jaquetas",
+      brand: "M",
+      price: "R$ 100,00",
+      discount: "10%",
+      stock: 10,
     },
   ];
 
@@ -64,36 +74,63 @@ const AllProductsSellerAdmin = () => {
                   Estoque
                 </th>
                 <th scope="col" className="py-3 px-4">
-                  Estoque
-                </th>
-                <th scope="col" className="py-3 px-4">
                   Action
                 </th>
               </tr>
             </thead>
             <tbody>
-              {categories.map((category) => (
-                <tr key={category.id}>
+              {products.map((product) => (
+                <tr key={product.id}>
                   <td
                     scope="col"
                     className="py-3 px-4 font-medium whitespace-nowrap"
                   >
-                    {category.id}
+                    {product.id}
                   </td>
                   <td scope="col" className="py-3 px-4 font-medium">
                     <Image
                       width={40}
                       height={40}
                       className="rounded-md object-cover object-center"
-                      src={category.imageUrl}
-                      alt={category.name}
+                      src={product.imageUrl}
+                      alt={product.name}
                     />
                   </td>
                   <td
                     scope="col"
                     className="py-3 px-4 font-medium whitespace-nowrap"
                   >
-                    {category.name}
+                    {product.name}
+                  </td>
+                  <td
+                    scope="col"
+                    className="py-3 px-4 font-medium whitespace-nowrap"
+                  >
+                    {product.category}
+                  </td>
+                  <td
+                    scope="col"
+                    className="py-3 px-4 font-medium whitespace-nowrap"
+                  >
+                    {product.brand}
+                  </td>
+                  <td
+                    scope="col"
+                    className="py-3 px-4 font-medium whitespace-nowrap"
+                  >
+                    {product.price}
+                  </td>
+                  <td
+                    scope="col"
+                    className="py-3 px-4 font-medium whitespace-nowrap"
+                  >
+                    {product.discount}
+                  </td>
+                  <td
+                    scope="col"
+                    className="py-3 px-4 font-medium whitespace-nowrap"
+                  >
+                    {product.stock}
                   </td>
                   <td
                     scope="col"
