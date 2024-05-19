@@ -55,7 +55,7 @@ const OrdersPage = () => {
                 <div className="py-4 w-[18%] font-medium">pending</div>
                 <div className="py-4 w-[18%] font-medium">pending</div>
                 <div className="py-4 w-[18%] font-medium">
-                  <Link href={"/"}>View</Link>
+                  <Link href={"/orders/1"}>View</Link>
                 </div>
                 <div
                   className="py-4 w-[8%] font-medium cursor-pointer"
