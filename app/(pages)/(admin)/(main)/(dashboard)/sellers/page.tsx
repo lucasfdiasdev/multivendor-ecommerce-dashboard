@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { BsEye } from "react-icons/bs";
 
-import { Input } from "@/components/global/input";
+import Search from "@/components/global/search";
 import Pagination from "@/components/global/pagination";
 
 const SellersAdminPage = () => {
@@ -28,21 +28,12 @@ const SellersAdminPage = () => {
   return (
     <main className="px-4 md:px-8 py-4 space-y-8">
       <div className="w-full p-2 border rounded-md">
-        <div className="flex items-center justify-between">
-          <select
-            onChange={(e) => setParPage(parseInt(e.target.value))}
-            className="px-4 py-2 hover:border-indigo-500 outline-none bg-transparent border rounded-md cursor-pointer"
-          >
-            <option value="5">5</option>
-            <option value="5">15</option>
-            <option value="5">25</option>
-          </select>
-          <Input
-            type="text"
-            placeholder="Buscar em orders"
-            className="max-w-fit"
-          />
-        </div>
+        <Search
+          placeholder="Buscar em vendedores..."
+          searchValue={searchValue}
+          setParPage={setParPage}
+          setSearchValue={setSearchValue}
+        />
 
         <div className="relative overflow-x-auto">
           <table className="w-full text-sm text-left">

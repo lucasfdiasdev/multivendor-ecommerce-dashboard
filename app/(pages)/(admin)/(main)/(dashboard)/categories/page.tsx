@@ -6,11 +6,14 @@ import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi";
 
-import { Input } from "@/components/global/input";
+import Search from "@/components/global/search";
+import Pagination from "@/components/global/pagination";
 import CategoryForm from "@/components/forms/category-form";
 
 const CategoriesPage = () => {
   const [parPage, setParPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
 
   const categories = [
     {
@@ -28,24 +31,15 @@ const CategoriesPage = () => {
   ];
 
   return (
-    <main className="px-4 md:px-8 py-4 gap-4 space-y-8">
+    <main className="px-4 md:px-8 py-4 gap-4">
       <div className="w-full flex flex-col lg:flex-row gap-4">
         <div className="flex-[2] p-2 border rounded-md">
-          <div className="flex items-center justify-between">
-            <select
-              onChange={(e) => setParPage(parseInt(e.target.value))}
-              className="px-4 py-2 hover:border-indigo-500 outline-none bg-transparent border rounded-md cursor-pointer"
-            >
-              <option value="5">5</option>
-              <option value="5">15</option>
-              <option value="5">25</option>
-            </select>
-            <Input
-              type="text"
-              placeholder="Buscar categorias"
-              className="max-w-fit"
-            />
-          </div>
+          <Search
+            placeholder="Buscar em vendedores..."
+            searchValue={searchValue}
+            setParPage={setParPage}
+            setSearchValue={setSearchValue}
+          />
           <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left">
               <thead className="text-sm uppercase border-b border-slate-700">
@@ -101,6 +95,15 @@ const CategoriesPage = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="flex justify-end mt-4 bottom-4 right-4">
+            <Pagination
+              pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
+              totalItem={50}
+              parPage={parPage}
+              showItem={3}
+            />
           </div>
         </div>
         <div className="flex-[1] p-2 border rounded-md">
