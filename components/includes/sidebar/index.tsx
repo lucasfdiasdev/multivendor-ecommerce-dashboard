@@ -2,20 +2,21 @@
 
 import clsx from "clsx";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import {
+  FaUsers,
+  FaUserClock,
+  FaUsersSlash,
+  FaClipboardList,
+} from "react-icons/fa";
 import { LuLogOut } from "react-icons/lu";
 import { PiTeaBag } from "react-icons/pi";
-import { AiOutlineHome } from "react-icons/ai";
-import { BsChatRightDots } from "react-icons/bs";
+import { CiDiscount1 } from "react-icons/ci";
 import { MdDashboard, MdAttachMoney } from "react-icons/md";
-import {
-  FaClipboardList,
-  FaUserClock,
-  FaUsers,
-  FaUsersSlash,
-} from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { BsBagPlus, BsChatRightDots } from "react-icons/bs";
+import { AiOutlineHome, AiOutlineProduct } from "react-icons/ai";
 
 interface IRoute {
   label: string;
@@ -30,12 +31,6 @@ const routes: IRoute[] = [
     icon: AiOutlineHome,
     href: "/dashboard",
     role: "ADMIN",
-  },
-  {
-    label: "Dashboard",
-    icon: AiOutlineHome,
-    href: "/seller/dashboard",
-    role: "SELLER",
   },
   {
     label: "Ordens",
@@ -79,6 +74,56 @@ const routes: IRoute[] = [
     href: "/sellers-chat",
     role: "ADMIN",
   },
+
+  // seller routes
+  {
+    label: "Dashboard",
+    icon: AiOutlineHome,
+    href: "/seller/dashboard",
+    role: "SELLER",
+  },
+  {
+    label: "Adicionar Produtos",
+    icon: BsBagPlus,
+    href: "/seller/add-product",
+    role: "SELLER",
+  },
+  {
+    label: "Todos os produtos",
+    icon: AiOutlineProduct,
+    href: "/seller/all-products",
+    role: "SELLER",
+  },
+  {
+    label: "Descontos de produtos",
+    icon: CiDiscount1,
+    href: "/seller/discount-products",
+    role: "SELLER",
+  },
+  {
+    label: "Ordens",
+    icon: FaClipboardList,
+    href: "/seller/orders",
+    role: "SELLER",
+  },
+  {
+    label: "Pagamentos",
+    icon: MdAttachMoney,
+    href: "/seller/payments",
+    role: "SELLER",
+  },
+  {
+    label: "Chat Suporte",
+    icon: BsChatRightDots,
+    href: "/seller/support-chat",
+    role: "SELLER",
+  },
+  {
+    label: "Chat Compradores",
+    icon: BsChatRightDots,
+    href: "/seller/costumers-chat",
+    role: "SELLER",
+  },
 ];
 
 const getUserRole = () => {
@@ -90,15 +135,18 @@ const Sidebar = () => {
   const [allNav, setAllNav] = useState<IRoute[]>([]);
 
   useEffect(() => {
-    const role = getUserRole();
-    const filteredRoutes = routes.filter(
-      (route) => !route.role || route.role === role
-    );
+    const roles = getUserRole();
+    const filteredRoutes = routes.filter((route) => {
+      if (!route.role) return true;
+      if (roles.includes(route.role)) return true;
+      if (roles.includes("ADMIN") && route.role === "SELLER") return true;
+      return false;
+    });
     setAllNav(filteredRoutes);
   }, []);
 
   return (
-    <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
+    <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white overflow-y-auto">
       <div className="px-3 py-2 flex-1">
         <div className="flex items-center pl-3 mb-14">
           <div className="relative w-8 h-8 mr-4">
@@ -106,7 +154,7 @@ const Sidebar = () => {
           </div>
           <h1 className="text-2xl font-bold">MarketPlace</h1>
         </div>
-        <div className="space-y-1 overflow-y-auto">
+        <div className="space-y-1">
           {allNav.map((route) => (
             <Link
               href={route.href}
