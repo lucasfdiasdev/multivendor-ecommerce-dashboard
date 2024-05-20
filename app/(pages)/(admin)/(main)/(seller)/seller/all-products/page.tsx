@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -140,7 +141,9 @@ const AllProductsSellerAdmin = () => {
                     className="py-3 px-4 font-medium whitespace-nowrap"
                   >
                     <div className="flex gap-4">
-                      <CiEdit size={24} className="cursor-pointer" />
+                      <Link href={`/seller/all-products/${product.id}`}>
+                        <CiEdit size={24} className="cursor-pointer" />
+                      </Link>
                       <HiOutlineTrash size={24} className="cursor-pointer" />
                     </div>
                   </td>
