@@ -71,6 +71,9 @@ const AllProductsSellerAdmin = () => {
                   Price
                 </th>
                 <th scope="col" className="py-3 px-4">
+                  Desconto
+                </th>
+                <th scope="col" className="py-3 px-4">
                   Estoque
                 </th>
                 <th scope="col" className="py-3 px-4">
