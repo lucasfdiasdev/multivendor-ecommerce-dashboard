@@ -9,7 +9,13 @@ interface IAvatar {
   className?: string;
 }
 
-const Avatar: React.FC<IAvatar> = ({ src, alt, className, width, height }) => {
+const AvatarLarge: React.FC<IAvatar> = ({
+  src,
+  alt,
+  className,
+  width,
+  height,
+}) => {
   return (
     <Image
       width={width}
@@ -17,11 +23,11 @@ const Avatar: React.FC<IAvatar> = ({ src, alt, className, width, height }) => {
       src={src}
       alt={alt}
       className={clsx(
-        "relative h-10 w-10 flex shrink-0 overflow-hidden rounded-full border cursor-pointer object-cover object-center",
+        "relative flex shrink-0 overflow-hidden rounded-full border cursor-pointer object-cover object-center",
         className
       )}
     />
   );
 };
 
-export default Avatar;
+export default AvatarLarge;
