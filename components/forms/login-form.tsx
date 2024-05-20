@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { loginSchema } from "@/utils/schema";
+import { useSellerStore } from "@/store/use-seller-store";
 
 import {
   Form,
@@ -21,6 +22,8 @@ import { Button } from "@/components/global/button";
 import SocialAuthForm from "@/components/forms/social-auth-form";
 
 const LoginForm = () => {
+  const seller_login = useSellerStore((state) => state.seller_login);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const formLogin = useForm<z.infer<typeof loginSchema>>({
@@ -34,11 +37,16 @@ const LoginForm = () => {
   const onSubmitLogin: SubmitHandler<z.infer<typeof loginSchema>> = async (
     data
   ) => {
-    console.log(data);
     setIsLoading(true);
 
     try {
-    } catch (error) {}
+      seller_login(data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+
+      console.log(error);
+    }
   };
 
   return (

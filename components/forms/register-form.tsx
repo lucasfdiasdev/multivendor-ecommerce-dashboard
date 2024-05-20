@@ -3,10 +3,12 @@
 import * as z from "zod";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { registerSchema } from "@/utils/schema";
+import { useSellerStore } from "@/store/use-seller-store";
 
 import {
   Form,
@@ -21,9 +23,12 @@ import { Button } from "@/components/global/button";
 import SocialAuthForm from "@/components/forms/social-auth-form";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const formLogin = useForm<z.infer<typeof registerSchema>>({
+  const seller_register = useSellerStore((state: any) => state.seller_register);
+
+  const formSellerRegister = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       confirmCheck: false,
@@ -36,22 +41,30 @@ const RegisterForm = () => {
   const onSubmitRegister: SubmitHandler<
     z.infer<typeof registerSchema>
   > = async (data) => {
-    console.log(data);
     setIsLoading(true);
 
     try {
-    } catch (error) {}
+      await seller_register(data);
+
+      router.push("/seller/dashboard");
+
+      setIsLoading(true);
+    } catch (error) {
+      console.log(error);
+
+      setIsLoading(false);
+    }
   };
 
   return (
     <>
-      <Form {...formLogin}>
+      <Form {...formSellerRegister}>
         <form
-          onSubmit={formLogin.handleSubmit(onSubmitRegister)}
+          onSubmit={formSellerRegister.handleSubmit(onSubmitRegister)}
           className="space-y-4 w-full"
         >
           <FormField
-            control={formLogin.control}
+            control={formSellerRegister.control}
             name="name"
             render={({ field }) => (
               <FormItem>
@@ -69,7 +82,7 @@ const RegisterForm = () => {
             )}
           />
           <FormField
-            control={formLogin.control}
+            control={formSellerRegister.control}
             name="email"
             render={({ field }) => (
               <FormItem>
@@ -87,7 +100,7 @@ const RegisterForm = () => {
             )}
           />
           <FormField
-            control={formLogin.control}
+            control={formSellerRegister.control}
             name="password"
             render={({ field }) => (
               <FormItem>
@@ -105,7 +118,7 @@ const RegisterForm = () => {
             )}
           />
           <FormField
-            control={formLogin.control}
+            control={formSellerRegister.control}
             name="confirmCheck"
             render={({ field }) => (
               <FormItem>
@@ -115,11 +128,11 @@ const RegisterForm = () => {
                       type="checkbox"
                       className="text-gray-100 cursor-pointer"
                       disabled={isLoading}
-                      checked={formLogin.getValues("confirmCheck")}
+                      checked={formSellerRegister.getValues("confirmCheck")}
                       onChange={() => {
-                        formLogin.setValue(
+                        formSellerRegister.setValue(
                           "confirmCheck",
-                          !formLogin.getValues("confirmCheck")
+                          !formSellerRegister.getValues("confirmCheck")
                         );
                       }}
                     />
