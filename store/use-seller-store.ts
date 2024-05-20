@@ -62,6 +62,14 @@ export const useSellerStore = create<ISellerStore>((set) => ({
           );
           toast.error(axiosError.response.data.message);
         }
+
+        if (axiosError.response?.status === 400) {
+          console.error(
+            "Erro 404 - Password invalid:",
+            axiosError.response.data.message
+          );
+          toast.error(axiosError.response.data.message);
+        }
       }
     }
   },
