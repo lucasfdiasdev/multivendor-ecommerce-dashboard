@@ -10,12 +10,12 @@ interface IAdminStore {
 
 export const useAdminStore = create<IAdminStore>((set) => ({
   admin_login: async (info) => {
-    // console.log(info);
     try {
       const { data } = await axios.post(endpoints.admin_login, info, {
         withCredentials: true,
       });
-      // console.log(data);
+
+      localStorage.setItem("access_token", data.accessToken);
 
       set(data);
     } catch (error) {
