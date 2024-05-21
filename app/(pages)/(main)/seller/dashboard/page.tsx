@@ -4,22 +4,23 @@ import Link from "next/link";
 import Chart from "react-apexcharts";
 
 import { MdAttachMoney } from "react-icons/md";
+import { FaClipboardQuestion } from "react-icons/fa6";
 import { FaClipboardList, FaCubes, FaUsers } from "react-icons/fa";
 
 import Card from "@/components/global/card";
 import Avatar from "@/components/global/avatar";
 import CardContentSales from "@/components/dashboard/card-content-sales";
 
-const DashboardAdminPage = () => {
+const DashboardSellerPage = () => {
   const bodyContentSales = <CardContentSales change={20.9} amount={8930.63} />;
   const bodyContentProducts = (
     <h2 className="text-xl md:text-2xl font-semibold">6</h2>
   );
-  const bodyContentSellers = (
+  const bodyContentOrders = (
     <h2 className="text-xl md:text-2xl font-semibold">5</h2>
   );
-  const bodyContentOrders = (
-    <h2 className="text-xl md:text-2xl font-semibold">20</h2>
+  const bodyContentPendingOrders = (
+    <h2 className="text-xl md:text-2xl font-semibold">0</h2>
   );
 
   const state = {
@@ -101,7 +102,7 @@ const DashboardAdminPage = () => {
         data: [350, 69, 41, 698, 230, 36, 59, 230, 207, 215, 132],
       },
       {
-        name: "Sellers",
+        name: "Salles",
         data: [79, 81, 368, 3620, 1235, 3547, 601, 269, 266, 515, 232],
       },
     ],
@@ -121,14 +122,14 @@ const DashboardAdminPage = () => {
           bodyContent={bodyContentProducts}
         />
         <Card
-          title="Vendedores"
-          icon={FaUsers}
-          bodyContent={bodyContentSellers}
-        />
-        <Card
           title="Ordens"
           icon={FaClipboardList}
           bodyContent={bodyContentOrders}
+        />
+        <Card
+          title="Ordens Pendentes"
+          icon={FaClipboardQuestion}
+          bodyContent={bodyContentPendingOrders}
         />
       </div>
       <div className="w-full flex flex-col lg:flex-row gap-4">
@@ -156,12 +157,17 @@ const DashboardAdminPage = () => {
             <ol className="relative border-1 border-slate-600 ml-4">
               <li className="mb-4 ml-10">
                 <div className="flex absolute -left-6 p-[6px] z-10">
-                  <Avatar src="" alt="" width={32} height={32} />
+                  <Avatar
+                    src="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Avatar"
+                    width={32}
+                    height={32}
+                  />
                 </div>
                 <div className="p-2 border rounded-md border-slate-600">
                   <div className="flex items-center justify-between mb-2">
                     <Link href={"/"} className="text-base">
-                      Admin
+                      Customer
                     </Link>
                     <time className="mb-1 text-sm font-normal sm:order-last sm:mb-2">
                       4 day ago
@@ -248,4 +254,4 @@ const DashboardAdminPage = () => {
   );
 };
 
-export default DashboardAdminPage;
+export default DashboardSellerPage;
