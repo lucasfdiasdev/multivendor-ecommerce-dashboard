@@ -34,19 +34,21 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmitLogin: SubmitHandler<z.infer<typeof loginSchema>> = async (
-    data
-  ) => {
+  const handleLogin = async (data: { email: string; password: string }) => {
     setIsLoading(true);
-
     try {
-      seller_login(data);
+      await seller_login(data);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-
       console.log(error);
     }
+  };
+
+  const onSubmitLogin: SubmitHandler<z.infer<typeof loginSchema>> = async (
+    data
+  ) => {
+    handleLogin(data);
   };
 
   return (

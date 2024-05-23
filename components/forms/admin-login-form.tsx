@@ -7,7 +7,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { loginSchema } from "@/utils/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAdminStore } from "@/store/use-admin-store";
 
 import {
   Form,
@@ -19,10 +18,13 @@ import {
 } from "@/components/global/forms";
 import { Input } from "@/components/global/input";
 import { Button } from "@/components/global/button";
+import useAdminStore from "@/store/use-admin-store";
 
 const AdminLoginForm = () => {
   const router = useRouter();
-  const admin_login = useAdminStore((state: any) => state.admin_login);
+  const { admin_login } = useAdminStore((state: any) => ({
+    admin_login: state.admin_login,
+  }));
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,16 +36,14 @@ const AdminLoginForm = () => {
     },
   });
 
-  const onSubmitAdminLogin: SubmitHandler<z.infer<typeof loginSchema>> = async (
-    data
-  ) => {
+  const onSubmitAdminLogin: SubmitHandler<
+    z.infer<typeof loginSchema>
+  > = async (data: { email: string; password: string }) => {
     setIsLoading(true);
 
     try {
-      admin_login(data);
-
-      router.push("/dashboard");
-
+      await admin_login(data);
+      router.push("/admin/dashboard");
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

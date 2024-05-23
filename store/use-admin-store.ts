@@ -3,21 +3,35 @@ import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 
 import { endpoints } from "@/utils/endpoints";
+import { useAuthStore } from "./use-auth-store";
+import useUserStore, { User } from "./use-user-store";
 
-interface IAdminStore {
-  admin_login: (info: { email: string; password: string }) => Promise<void>;
+export interface IAdminStore {
+  user: User | null;
+  setUser: (user: User) => void;
+  admin_login: (info: { email: string; password: string }) => Promise<User>;
 }
 
-export const useAdminStore = create<IAdminStore>((set) => ({
+const useAdminStore = create<IAdminStore>((set) => ({
+  user: null,
+  setUser: (user) => {
+    set({ user });
+  },
   admin_login: async (info) => {
     try {
       const { data } = await axios.post(endpoints.admin_login, info, {
         withCredentials: true,
       });
 
+      // armazena o token no local storage
       localStorage.setItem("access_token", data.accessToken);
 
-      set(data);
+      // Armazene o token e o user no estado global
+      useAuthStore.getState().setAuth(data.accessToken, true);
+      useUserStore.getState().setUser(data.user);
+
+      set({ user: data.user });
+      return data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<any>;
@@ -34,18 +48,4 @@ export const useAdminStore = create<IAdminStore>((set) => ({
   },
 }));
 
-interface IAdminSession {
-  get_session: (session: {
-    userId?: string;
-    name?: string;
-    imageUrl?: string;
-    role?: string;
-  }) => Promise<void>;
-}
-
-export const useAdminSession = create<IAdminSession>((set) => ({
-  get_session: async (session) => {
-    try {
-    } catch (error) {}
-  },
-}));
+export default useAdminStore;
