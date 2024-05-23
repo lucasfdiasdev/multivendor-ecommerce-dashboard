@@ -21,15 +21,12 @@ const HeaderDashboard = () => {
         <div className="md:w-full flex items-center gap-4 justify-end">
           <BsChatRightDots size={24} />
 
-          {user?.imageUrl ? (
-            <UserButton
-              email={user?.email || ""}
-              avatar={user.imageUrl || ""}
-              role={user?.role || ""}
-            />
-          ) : (
-            <FaUser size={24} />
-          )}
+          <UserButton
+            email={user?.email || ""}
+            avatar={user?.imageUrl || "/user.jpg"}
+            role={user?.role || ""}
+            href={`/${user?.role}/profile`}
+          />
         </div>
       </div>
     </header>

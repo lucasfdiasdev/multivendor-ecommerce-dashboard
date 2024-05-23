@@ -13,36 +13,33 @@ import {
 } from "@/components/global/dropdown-menu";
 import Avatar from "@/components/global/avatar";
 
-const UserButton = () => {
+interface IUserButton {
+  avatar: string;
+  role: string;
+  email: string;
+  href: string;
+}
+
+const UserButton: React.FC<IUserButton> = ({ avatar, role, email, href }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar
-          src={
-            "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          alt="avatar user"
-          width={40}
-          height={40}
-        />
+        <Avatar src={avatar} alt="avatar user" width={40} height={40} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56 bg-white">
         <DropdownMenuLabel className="flex flex-col">
-          lucasferndias@gmail.com
-          <span className="text-xs text-gray-400">admin</span>
+          {email}
+          <span className="text-xs text-gray-400 lowercase">{role}</span>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Link href={"/seller/store"} className="w-full">
-              Minha Loja
-            </Link>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href={"/seller/profile"} className="w-full">
+            <Link href={href} className="w-full">
               Minha conta
             </Link>
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>

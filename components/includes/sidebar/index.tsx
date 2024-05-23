@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import useUser from "@/hooks/useUser";
+
 import {
   FaUsers,
   FaUserClock,
@@ -23,56 +25,66 @@ interface IRoute {
   icon: React.ElementType;
   href: string;
   role?: string;
+  status?: string;
+  visibility?: string[];
 }
-
 const routes: IRoute[] = [
   {
     label: "Dashboard",
     icon: AiOutlineHome,
-    href: "/admin/dashboard",
-    role: "ADMIN",
+    href: "/owner/dashboard",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Ordens",
     icon: FaClipboardList,
-    href: "/admin/orders",
-    role: "ADMIN",
+    href: "/owner/orders",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Categoria",
     icon: MdDashboard,
-    href: "/admin/categories",
-    role: "ADMIN",
+    href: "/owner/categories",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Vendedores",
     icon: FaUsers,
-    href: "/admin/sellers",
-    role: "ADMIN",
+    href: "/owner/sellers",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Pagamentos Recebidos",
     icon: MdAttachMoney,
-    href: "/admin/payments-request",
-    role: "ADMIN",
+    href: "/owner/payments-request",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Vendedores Inativos",
     icon: FaUsersSlash,
-    href: "/admin/sellers-inactive",
-    role: "ADMIN",
+    href: "/owner/sellers-deactive",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Solicitação de Vendedores",
     icon: FaUserClock,
-    href: "/admin/sellers-request",
-    role: "ADMIN",
+    href: "/owner/sellers-request",
+    role: "owner",
+    status: "active",
   },
   {
     label: "Chat Vendedores",
     icon: BsChatRightDots,
-    href: "/admin/sellers-chat",
-    role: "ADMIN",
+    href: "/owner/sellers-chat",
+    role: "owner",
+    status: "active",
+    visibility: ["active", "pending", "deactive"],
   },
 
   // seller routes
@@ -80,70 +92,79 @@ const routes: IRoute[] = [
     label: "Dashboard",
     icon: AiOutlineHome,
     href: "/seller/dashboard",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
   },
   {
     label: "Adicionar Produtos",
     icon: BsBagPlus,
     href: "/seller/add-product",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
   },
   {
     label: "Todos os produtos",
     icon: AiOutlineProduct,
     href: "/seller/all-products",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
   },
   {
     label: "Descontos de produtos",
     icon: CiDiscount1,
     href: "/seller/discount-products",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
   },
   {
     label: "Ordens",
     icon: FaClipboardList,
     href: "/seller/orders",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
   },
   {
     label: "Pagamentos",
     icon: MdAttachMoney,
     href: "/seller/payments",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
   },
   {
     label: "Chat Suporte",
     icon: BsChatRightDots,
     href: "/seller/support-chat",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
+    visibility: ["active", "pending", "deactive"],
   },
   {
     label: "Chat Compradores",
     icon: BsChatRightDots,
     href: "/seller/costumers-chat",
-    role: "SELLER",
+    role: "seller",
+    status: "active",
+    visibility: ["active", "pending", "deactive"],
   },
 ];
 
-const getUserRole = () => {
-  return "ADMIN";
-};
-
 const Sidebar = () => {
+  const { user } = useUser();
   const pathname = usePathname();
+
+  const userRole = user?.role;
+
   const [allNav, setAllNav] = useState<IRoute[]>([]);
 
   useEffect(() => {
-    const roles = getUserRole();
     const filteredRoutes = routes.filter((route) => {
       if (!route.role) return true;
-      if (roles.includes(route.role)) return true;
-      if (roles.includes("ADMIN") && route.role === "SELLER") return true;
+      if (userRole === "owner") return true;
+      if (userRole === "seller" && route.role === "seller") return true;
       return false;
     });
     setAllNav(filteredRoutes);
-  }, []);
+  }, [userRole]);
 
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white overflow-y-auto">
