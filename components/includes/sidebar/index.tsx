@@ -121,7 +121,7 @@ const routes: IRoute[] = [
     icon: FaClipboardList,
     href: "/seller/orders",
     role: "seller",
-    status: "active",
+    visibility: ["active", "deactive"],
   },
   {
     label: "Pagamentos",
@@ -144,13 +144,15 @@ const routes: IRoute[] = [
     href: "/seller/costumers-chat",
     role: "seller",
     status: "active",
-    visibility: ["active", "pending", "deactive"],
+    visibility: ["active", "deactive"],
   },
 ];
 
 const Sidebar = () => {
   const { user } = useUser();
   const pathname = usePathname();
+  const userStatus = user?.status;
+  const userPayment = user?.payment;
 
   const userRole = user?.role;
 
@@ -158,13 +160,23 @@ const Sidebar = () => {
 
   useEffect(() => {
     const filteredRoutes = routes.filter((route) => {
+      // Inclui a rota se ela não tiver uma propriedade role
       if (!route.role) return true;
-      if (userRole === "owner") return true;
-      if (userRole === "seller" && route.role === "seller") return true;
-      return false;
+
+      if (userRole === "owner" && route.role === "owner") return true;
+
+      // verifica se o role nao corresponde ao role do usuario
+      if (route.role !== userRole) return false;
+
+      if (route.visibility) {
+        return route.visibility.includes(userStatus);
+      }
+
+      return route.status ? route.status === userStatus : true;
     });
+
     setAllNav(filteredRoutes);
-  }, [userRole]);
+  }, [userRole, userStatus]);
 
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white overflow-y-auto">

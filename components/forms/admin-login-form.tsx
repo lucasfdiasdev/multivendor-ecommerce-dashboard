@@ -43,7 +43,7 @@ const AdminLoginForm = () => {
 
     try {
       await admin_login(data);
-      router.push("/admin/dashboard");
+      router.push("/owner/dashboard");
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
