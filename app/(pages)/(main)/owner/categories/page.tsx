@@ -1,30 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi";
 
-import useCategoryStore from "@/store/use-category-store";
+import useCategory from "@/hooks/useCategory";
 
 import Search from "@/components/global/search";
 import Pagination from "@/components/global/pagination";
 import CategoryForm from "@/components/forms/category-form";
 
 const CategoriesPage = () => {
-  const { categories, get_categories } = useCategoryStore((state: any) => ({
-    categories: state.categories,
-    get_categories: state.get_categories,
-  }));
+  const { categories } = useCategory();
 
   const [parPage, setParPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-
-  useEffect(() => {
-    get_categories();
-  }, [get_categories]);
 
   console.log(categories);
 

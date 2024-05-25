@@ -13,42 +13,44 @@ interface ICategory {
 
 interface ICategoryStore {
   categories: ICategory[];
-  get_categories: () => Promise<void>;
-  add_category: (info: {
+  addCategory: (info: {
     name: string;
     image: File;
   }) => Promise<ICategory | void>;
+  getCategories: () => Promise<void>;
 }
 
-const useCategoryStore = create<ICategoryStore>((set) => ({
+const useCategoryStore = create<ICategoryStore>((setState) => ({
   categories: [],
-  add_category: async (info) => {
+  addCategory: async (info) => {
     try {
       const formData = new FormData();
       formData.append("name", info.name);
       formData.append("image", info.image);
 
-      const { data } = await axios.post(endpoints.add_category, info, {
+      const { data } = await axios.post(endpoints.add_category, formData, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      set((state) => ({ categories: [...state.categories, data.category] }));
+      setState((state) => ({
+        categories: [...state.categories, data.category],
+      }));
 
       return data;
     } catch (error) {
       console.log(error);
     }
   },
-  get_categories: async () => {
+  getCategories: async () => {
     try {
       const { data } = await axios.get(endpoints.get_category, {
         withCredentials: true,
       });
 
-      set({ categories: data.category.categories });
+      setState({ categories: data.data.categories });
     } catch (error) {
       console.log(error);
     }
