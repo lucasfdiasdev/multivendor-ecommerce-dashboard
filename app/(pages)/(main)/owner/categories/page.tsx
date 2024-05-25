@@ -1,34 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi";
+
+import useCategoryStore from "@/store/use-category-store";
 
 import Search from "@/components/global/search";
 import Pagination from "@/components/global/pagination";
 import CategoryForm from "@/components/forms/category-form";
 
 const CategoriesPage = () => {
+  const { categories, get_categories } = useCategoryStore((state: any) => ({
+    categories: state.categories,
+    get_categories: state.get_categories,
+  }));
+
   const [parPage, setParPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
-  const categories = [
-    {
-      id: 1,
-      name: "Camisas",
-      imageUrl:
-        "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 2,
-      name: "Jaquetas",
-      imageUrl:
-        "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  useEffect(() => {
+    get_categories();
+  }, [get_categories]);
+
+  console.log(categories);
 
   return (
     <main className="px-4 md:px-8 py-4 gap-4">
@@ -48,10 +46,10 @@ const CategoriesPage = () => {
                     NO
                   </th>
                   <th scope="col" className="py-3 px-4">
-                    Nome
+                    Imagem
                   </th>
                   <th scope="col" className="py-3 px-4">
-                    Imagem
+                    Nome
                   </th>
                   <th scope="col" className="py-3 px-4">
                     ACTION
@@ -59,40 +57,51 @@ const CategoriesPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {categories.map((category) => (
-                  <tr key={category.id}>
-                    <td
-                      scope="col"
-                      className="py-3 px-4 font-medium whitespace-nowrap"
-                    >
-                      {category.id}
-                    </td>
-                    <td
-                      scope="col"
-                      className="py-3 px-4 font-medium whitespace-nowrap"
-                    >
-                      {category.name}
-                    </td>
-                    <td scope="col" className="py-3 px-4 font-medium">
-                      <Image
-                        width={40}
-                        height={40}
-                        className="rounded-md object-cover object-center"
-                        src={category.imageUrl}
-                        alt={category.name}
-                      />
-                    </td>
-                    <td
-                      scope="col"
-                      className="py-3 px-4 font-medium whitespace-nowrap"
-                    >
-                      <div className="flex gap-4">
-                        <CiEdit size={24} className="cursor-pointer" />
-                        <HiOutlineTrash size={24} className="cursor-pointer" />
-                      </div>
+                {Array.isArray(categories) && categories.length > 0 ? (
+                  categories.map((category: any, index: number) => (
+                    <tr key={index}>
+                      <td
+                        scope="col"
+                        className="py-3 px-4 font-medium whitespace-nowrap"
+                      >
+                        {category._id}
+                      </td>
+                      <td scope="col" className="py-3 px-4 font-medium">
+                        <Image
+                          width={40}
+                          height={40}
+                          className="rounded-md object-cover object-center"
+                          src={category.image}
+                          alt={category.name}
+                        />
+                      </td>
+                      <td
+                        scope="col"
+                        className="py-3 px-4 font-medium whitespace-nowrap"
+                      >
+                        {category.name}
+                      </td>
+                      <td
+                        scope="col"
+                        className="py-3 px-4 font-medium whitespace-nowrap"
+                      >
+                        <div className="flex gap-4">
+                          <CiEdit size={24} className="cursor-pointer" />
+                          <HiOutlineTrash
+                            size={24}
+                            className="cursor-pointer"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={4} className="text-center py-3 px-4">
+                      Nenhuma categoria encontrada.
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
