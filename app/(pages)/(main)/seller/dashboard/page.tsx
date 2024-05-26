@@ -5,10 +5,10 @@ import Chart from "react-apexcharts";
 
 import { MdAttachMoney } from "react-icons/md";
 import { FaClipboardQuestion } from "react-icons/fa6";
-import { FaClipboardList, FaCubes, FaUsers } from "react-icons/fa";
+import { FaClipboardList, FaCubes } from "react-icons/fa";
 
-import Card from "@/components/global/card";
-import Avatar from "@/components/global/avatar";
+import CardItem from "@/components/dashboard/card-item";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import CardContentSales from "@/components/dashboard/card-content-sales";
 
 const DashboardSellerPage = () => {
@@ -111,22 +111,22 @@ const DashboardSellerPage = () => {
   return (
     <main className="px-4 md:px-8 py-4 space-y-8">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <Card
+        <CardItem
           title="Total de Vendas"
           bodyContent={bodyContentSales}
           icon={MdAttachMoney}
         />
-        <Card
+        <CardItem
           title="Produtos"
           icon={FaCubes}
           bodyContent={bodyContentProducts}
         />
-        <Card
+        <CardItem
           title="Ordens"
           icon={FaClipboardList}
           bodyContent={bodyContentOrders}
         />
-        <Card
+        <CardItem
           title="Ordens Pendentes"
           icon={FaClipboardQuestion}
           bodyContent={bodyContentPendingOrders}
@@ -157,12 +157,14 @@ const DashboardSellerPage = () => {
             <ol className="relative border-1 border-slate-600 ml-4">
               <li className="mb-4 ml-10">
                 <div className="flex absolute -left-6 p-[6px] z-10">
-                  <Avatar
-                    src="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Avatar"
-                    width={32}
-                    height={32}
-                  />
+                  <Avatar>
+                    <AvatarImage
+                      src="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      alt="Avatar"
+                      width={32}
+                      height={32}
+                    />
+                  </Avatar>
                 </div>
                 <div className="p-2 border rounded-md border-slate-600">
                   <div className="flex items-center justify-between mb-2">

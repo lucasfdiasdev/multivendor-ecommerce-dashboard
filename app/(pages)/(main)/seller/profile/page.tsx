@@ -8,8 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CiEdit } from "react-icons/ci";
 import { BsImage } from "react-icons/bs";
 
-import { Input } from "@/components/global/input";
-import AvatarLarge from "@/components/global/avatar-large";
 import {
   Form,
   FormControl,
@@ -17,8 +15,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/global/forms";
-import { Button } from "@/components/global/button";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import AvatarLarge from "@/components/global/avatar-large";
 
 const ProfileSellerPage = () => {
   const imageUrl = true;

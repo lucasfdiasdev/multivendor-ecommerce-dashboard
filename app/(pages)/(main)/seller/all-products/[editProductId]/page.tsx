@@ -16,9 +16,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/global/forms";
-import { Input } from "@/components/global/input";
-import { Button } from "@/components/global/button";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const EditProductIdSellerPage = () => {
   const [images, setImages] = useState<any[]>([]);

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/global/button";
+import { Button } from "@/components/ui/button";
 import AvatarLarge from "@/components/global/avatar-large";
 
 const SellerIdAdminPage = () => {

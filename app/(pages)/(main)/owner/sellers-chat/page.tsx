@@ -1,13 +1,14 @@
 "use client";
 
-import clsx from "clsx";
 import { useState } from "react";
 
 import { MdClose } from "react-icons/md";
 
-import Avatar from "@/components/global/avatar";
-import { Input } from "@/components/global/input";
-import { Button } from "@/components/global/button";
+import { cn } from "@/lib/utils";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const SellersChatAdminPage = () => {
   const [show, setShow] = useState(false);
@@ -29,7 +30,7 @@ const SellersChatAdminPage = () => {
         <div className="flex w-full h-full relative">
           {/* left */}
           <div
-            className={clsx(
+            className={cn(
               "w-[280px] border-r h-full absolute z-10 md:left-0 md:relative transition-all",
               show ? "-left-[16px]" : "-[336px]"
             )}
@@ -47,17 +48,19 @@ const SellersChatAdminPage = () => {
               {sellersChat.map((seller) => (
                 <div
                   key={seller.id}
-                  className={clsx(
+                  className={cn(
                     "h-16 flex justify-start gap-2 items-center p-2 rounded-tl-sm rounded-bl-sm cursor-pointer bg-slate-200"
                   )}
                 >
                   <div className="relative">
-                    <Avatar
-                      width={60}
-                      height={60}
-                      src={seller.imageUrl}
-                      alt="Avatar name"
-                    />
+                    <Avatar>
+                      <AvatarImage
+                        width={60}
+                        height={60}
+                        src={seller.imageUrl}
+                        alt="Avatar name"
+                      />
+                    </Avatar>
                     <div className="absolute rounded-full w-2.5 h-2.5 right-0 bottom-0 bg-green-500"></div>
                   </div>
                   <div className="flex justify-center items-start flex-col w-full">
@@ -76,14 +79,16 @@ const SellersChatAdminPage = () => {
               {sellerId && (
                 <div className="flex justify-center items-center gap-4">
                   <div className="relative">
-                    <Avatar
-                      width={40}
-                      height={40}
-                      src={
-                        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      }
-                      alt="Avatar name"
-                    />
+                    <Avatar>
+                      <AvatarImage
+                        width={40}
+                        height={40}
+                        src={
+                          "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        }
+                        alt="Avatar name"
+                      />
+                    </Avatar>
                     <div className="absolute rounded-full w-2.5 h-2.5 right-0 bottom-0 bg-green-500"></div>
                   </div>
                 </div>

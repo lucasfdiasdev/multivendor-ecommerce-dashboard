@@ -16,9 +16,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/global/forms";
-import { Input } from "@/components/global/input";
-import { Button } from "@/components/global/button";
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const AddProductSellerPage = () => {
   const [images, setImages] = useState<any[]>([]);
@@ -303,7 +303,6 @@ const AddProductSellerPage = () => {
                   className="relative w-full h-[140px] cursor-pointer"
                 >
                   <Image
-                    fill
                     src={image.url}
                     alt={image.url}
                     className="object-cover object-center w-full h-full rounded-md"
@@ -314,8 +313,10 @@ const AddProductSellerPage = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input
+                          <input
                             {...field}
+                            id="productImages"
+                            name="productImages"
                             type="file"
                             onChange={(e) =>
                               e.target.files &&

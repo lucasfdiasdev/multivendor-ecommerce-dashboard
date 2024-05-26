@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 
 import {
@@ -10,8 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/global/dropdown-menu";
-import Avatar from "@/components/global/avatar";
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 interface IUserButton {
   avatar: string;
@@ -24,7 +25,9 @@ const UserButton: React.FC<IUserButton> = ({ avatar, role, email, href }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar src={avatar} alt="avatar user" width={40} height={40} />
+        <Avatar>
+          <AvatarImage src={avatar} alt="avatar user" width={40} height={40} />
+        </Avatar>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56 bg-white">

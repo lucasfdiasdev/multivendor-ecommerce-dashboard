@@ -2,9 +2,9 @@
 
 import { MdAttachMoney } from "react-icons/md";
 
-import Card from "@/components/global/card";
-import { Input } from "@/components/global/input";
-import { Button } from "@/components/global/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import CardItem from "@/components/dashboard/card-item";
 import CardContentSales from "@/components/dashboard/card-content-sales";
 
 const PaymentsSellerPage = () => {
@@ -25,22 +25,22 @@ const PaymentsSellerPage = () => {
   return (
     <main className="px-4 md:px-8 py-4 space-y-8">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <Card
+        <CardItem
           title="Total de Vendas"
           bodyContent={bodyContentSales}
           icon={MdAttachMoney}
         />
-        <Card
+        <CardItem
           title="Quantidade Disponível"
           icon={MdAttachMoney}
           bodyContent={bodyContentProducts}
         />
-        <Card
+        <CardItem
           title="Quantidade Retirada"
           icon={MdAttachMoney}
           bodyContent={bodyContentWithdrawal}
         />
-        <Card
+        <CardItem
           title="Valor Pendente"
           icon={MdAttachMoney}
           bodyContent={bodyContentPending}

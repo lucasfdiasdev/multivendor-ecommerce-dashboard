@@ -1,5 +1,6 @@
-import clsx from "clsx";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
 
 interface IAvatar {
   src: string;
@@ -22,7 +23,7 @@ const AvatarLarge: React.FC<IAvatar> = ({
       height={height}
       src={src}
       alt={alt}
-      className={clsx(
+      className={cn(
         "relative flex shrink-0 overflow-hidden rounded-full border cursor-pointer object-cover object-center",
         className
       )}

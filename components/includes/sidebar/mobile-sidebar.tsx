@@ -1,8 +1,8 @@
 import { FiMenu } from "react-icons/fi";
 
+import { Button } from "@/components/ui/button";
 import Sidebar from "@/components/includes/sidebar";
-import { Button } from "@/components/global/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/global/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const MobileSidebar = () => {
   return (

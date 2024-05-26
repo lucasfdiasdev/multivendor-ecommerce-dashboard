@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { loginSchema } from "@/utils/schema";
+import useAdminStore from "@/store/use-admin-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -15,10 +16,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/global/forms";
-import { Input } from "@/components/global/input";
-import { Button } from "@/components/global/button";
-import useAdminStore from "@/store/use-admin-store";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const AdminLoginForm = () => {
   const router = useRouter();
