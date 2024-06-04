@@ -5,6 +5,16 @@ import { useEffect } from "react";
 import useAdminStore from "@/store/use-admin-store";
 import { useSellerStore } from "@/store/use-seller-store";
 
+export type User = {
+  userId: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  method: string;
+  imageUrl: string;
+};
+
 const useUser = () => {
   const { user: adminUser, setUser: setAdminUser } = useAdminStore(
     (state: any) => ({
@@ -42,7 +52,10 @@ const useUser = () => {
     );
   };
 
-  return { user: getUser(), setUser: setUserAndStore };
+  // Função para pegar o userId
+  const getUserId = () => (user ? user.userId : null);
+
+  return { user: getUser(), setUser: setUserAndStore, getUserId };
 };
 
 export default useUser;

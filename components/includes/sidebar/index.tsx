@@ -98,7 +98,7 @@ const routes: IRoute[] = [
   {
     label: "Adicionar Produtos",
     icon: BsBagPlus,
-    href: "/seller/add-product",
+    href: "/seller/product",
     role: "seller",
     status: "active",
   },
@@ -152,7 +152,6 @@ const Sidebar = () => {
   const { user } = useUser();
   const pathname = usePathname();
   const userStatus = user?.status;
-  const userPayment = user?.payment;
 
   const userRole = user?.role;
 

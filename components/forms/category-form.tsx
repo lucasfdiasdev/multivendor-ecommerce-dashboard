@@ -13,12 +13,22 @@ import { Button } from "@/components/ui/button";
 
 const CategoryForm = () => {
   const router = useRouter();
-  const addCategory = useCategoryStore((state: any) => state.addCategory);
+  const [addSubcategoryInput, setAddSubcategoryInput] = useState<
+    Array<{ id: number }>
+  >([]);
+  const addDepartament = useCategoryStore((state: any) => state.addDepartament);
+
+  const addInput = () => {
+    setAddSubcategoryInput([
+      ...addSubcategoryInput,
+      { id: addSubcategoryInput.length },
+    ]);
+  };
 
   const [imageShow, setImageShow] = useState("");
   const [state, setState] = useState({
-    name: "",
-    image: null as File | null,
+    departament_name: "",
+    departament_image: null as File | null,
   });
 
   const imageHandler = (e: any) => {
@@ -28,19 +38,20 @@ const CategoryForm = () => {
       setImageShow(URL.createObjectURL(file[0]));
       setState({
         ...state,
-        image: file[0],
+        departament_image: file[0],
       });
     }
   };
 
   const add_category = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await addCategory(state);
-    const response = await addCategory(state);
+
+    const response = await addDepartament(state);
+
     if (response) {
       setState({
-        name: "",
-        image: null,
+        departament_name: "",
+        departament_image: null,
       });
       setImageShow("");
       router.back();
@@ -49,8 +60,8 @@ const CategoryForm = () => {
 
   useEffect(() => {
     setState({
-      name: "",
-      image: null,
+      departament_name: "",
+      departament_image: null,
     });
     setImageShow("");
   }, []);
@@ -59,14 +70,16 @@ const CategoryForm = () => {
     <form onSubmit={add_category} className="space-y-8 w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         <div className="flex flex-col gap-1">
-          <label htmlFor="name" className="text-sm font-semibold">
-            Nome
+          <label htmlFor="departament_name" className="text-sm font-semibold">
+            Nome do Departamento
           </label>
           <Input
-            id="name"
-            value={state.name}
-            onChange={(e) => setState({ ...state, name: e.target.value })}
-            placeholder="Nome da Categoria"
+            id="departament_name"
+            value={state.departament_name}
+            onChange={(e) =>
+              setState({ ...state, departament_name: e.target.value })
+            }
+            placeholder="Nome Departamento"
             type="text"
             required
           />
@@ -75,12 +88,12 @@ const CategoryForm = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         <div className="flex flex-col gap-1">
-          <label htmlFor="name" className="text-sm font-semibold">
-            Imagem
+          <label htmlFor="departament_image" className="text-sm font-semibold">
+            Imagem do Departamento
           </label>
 
           <label
-            htmlFor="image"
+            htmlFor="departament_image"
             className="flex items-center justify-center flex-col h-[238px] cursor-pointer border border-dashed w-full rounded-md"
           >
             {imageShow ? (
@@ -99,16 +112,16 @@ const CategoryForm = () => {
             )}
           </label>
           <input
-            id="image"
+            id="departament_image"
             type="file"
-            name="image"
+            name="departament_image"
             onChange={imageHandler}
             className="hidden"
             required
           />
         </div>
       </div>
-      <Button type="submit">Adicionar Categoria</Button>
+      <Button type="submit">Adicionar Departamento</Button>
     </form>
   );
 };

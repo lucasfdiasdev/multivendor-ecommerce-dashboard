@@ -10,14 +10,14 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DepartamentColumn } from "./column";
+import { ProductColumn } from "./column";
 import { Button } from "@/components/ui/button";
 
 interface ICellAction {
-  data: DepartamentColumn;
+  data: ProductColumn;
 }
 
-const DepartamentCellAction: React.FC<ICellAction> = ({ data }) => {
+const ProductCellAction: React.FC<ICellAction> = ({ data }) => {
   const router = useRouter();
 
   return (
@@ -31,14 +31,14 @@ const DepartamentCellAction: React.FC<ICellAction> = ({ data }) => {
       <DropdownMenuContent align="end">
         <DropdownMenuItem
           className="cursor-pointer"
-          onClick={() => router.push(`/owner/categories/${data._id}`)}
+          onClick={() => router.push(`/seller/product/${data._id}`)}
         >
           <Edit className="mr-2 h-4 w-4" />
           Editar
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer"
-          onClick={() => router.push(`/owner/categories/${data._id}`)}
+          onClick={() => router.push(`/seller/product/${data._id}`)}
         >
           <Trash className="mr-2 h-4 w-4" />
           Deletar
@@ -48,4 +48,4 @@ const DepartamentCellAction: React.FC<ICellAction> = ({ data }) => {
   );
 };
 
-export default DepartamentCellAction;
+export default ProductCellAction;

@@ -2,25 +2,27 @@
 
 import { format } from "date-fns";
 
-import useCategory from "@/hooks/useCategory";
+import useDepartament from "@/hooks/useDepartament";
 
 import CategoryClient from "./_components/client";
-import { CategoryColumn } from "./_components/column";
+import { DepartamentColumn } from "./_components/column";
 
 const CategoriesPage = () => {
-  const { categories } = useCategory();
+  const { departaments } = useDepartament();
 
-  const formatedCategory: CategoryColumn[] = categories.map((item) => ({
-    _id: item._id,
-    name: item.name,
-    image: item.image,
-    createdAt: format(new Date(item.createdAt), "dd/MM/yyyy"),
-  }));
+  const formatedDepartment: DepartamentColumn[] = departaments.map(
+    (item: any) => ({
+      _id: item._id,
+      departament_name: item.departament_name,
+      departament_image: item.departament_image,
+      createdAt: format(new Date(item?.createdAt), "dd/MM/yyyy"),
+    })
+  );
 
   return (
     <main className="flex-col">
       <div className="flex-1 space-y-4 p-8">
-        <CategoryClient data={formatedCategory} />
+        <CategoryClient data={formatedDepartment} />
       </div>
     </main>
   );

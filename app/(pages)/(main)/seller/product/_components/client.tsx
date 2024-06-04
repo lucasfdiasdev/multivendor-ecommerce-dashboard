@@ -1,39 +1,37 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { Button } from "@/components/ui/button";
-
+import { ProductColumn, columns } from "./column";
 import Heading from "@/components/global/heading";
-import { DepartamentColumn, columns } from "./column";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 
-interface IDepartment {
-  data: DepartamentColumn[];
+interface IProduct {
+  data: ProductColumn[];
 }
 
-const DepartamentClient: React.FC<IDepartment> = ({ data }) => {
+const ProductClient: React.FC<IProduct> = ({ data }) => {
   const router = useRouter();
 
   return (
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Categoria (${data.length})`}
+          title={`Meus Produtos (${data.length})`}
           description="Adicionar categorias no marketplace"
         />
-        <Button onClick={() => router.push(`/owner/categories/new`)}>
+        <Button onClick={() => router.push(`/seller/product/new`)}>
           <AiOutlinePlus size={20} className="mr-2 h-4 w-4" />
-          Add Categoria
+          Novo Produto
         </Button>
       </div>
       <Separator />
-      <DataTable searchKey="departament_name" columns={columns} data={data} />
+      <DataTable searchKey="product_name" columns={columns} data={data} />
     </>
   );
 };
 
-export default DepartamentClient;
+export default ProductClient;

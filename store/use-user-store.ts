@@ -11,8 +11,8 @@ export type User = {
 };
 
 export interface IUserStore {
-  user: string | null;
-  setUser: (user: string) => void;
+  user: User | null;
+  setUser: (user: User | null) => void;
 }
 
 const useUserStore = create<IUserStore>()(

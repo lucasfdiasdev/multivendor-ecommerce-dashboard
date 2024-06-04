@@ -3,23 +3,23 @@
 import Image from "next/image";
 import { ColumnDef } from "@tanstack/react-table";
 
-import CategoryCellAction from "./cell-action";
+import DepartamentCellAction from "./cell-action";
 
-export type CategoryColumn = {
+export type DepartamentColumn = {
   _id: string;
-  name: string;
-  image: string;
+  departament_name: string;
+  departament_image: string;
   createdAt: string;
 };
 
-export const columns: ColumnDef<CategoryColumn>[] = [
+export const columns: ColumnDef<DepartamentColumn>[] = [
   {
-    accessorKey: "image",
+    accessorKey: "departament_image",
     header: "Imagem",
     cell: ({ row }) => (
       <Image
-        src={row.original.image}
-        alt={row.original.name}
+        src={row.original.departament_image}
+        alt={row.original.departament_name}
         width={30}
         height={30}
         className="rounded-md object-cover object-center"
@@ -27,8 +27,8 @@ export const columns: ColumnDef<CategoryColumn>[] = [
     ),
   },
   {
-    accessorKey: "name",
-    header: "name",
+    accessorKey: "departament_name",
+    header: "Nome",
   },
   {
     accessorKey: "createdAt",
@@ -36,6 +36,6 @@ export const columns: ColumnDef<CategoryColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CategoryCellAction data={row.original} />,
+    cell: ({ row }) => <DepartamentCellAction data={row.original} />,
   },
 ];
